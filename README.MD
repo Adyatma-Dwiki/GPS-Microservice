@@ -36,6 +36,11 @@ This microservice handles the storage and management of GPS logs for vehicles.
 
 ## Database Schema
 
+The project uses the following database schema:
+
+- Table `vehicles`: stores vehicle information (plate number, name, type)
+- Table `gps_logs`: stores GPS logs linked to vehicles via foreign key
+
 ### `vehicles` Table
 
 | Column        | Type    | Description                          |
@@ -71,7 +76,7 @@ This microservice handles the storage and management of GPS logs for vehicles.
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/your-username/gps-logs-microservice.git
+git clone https://github.com/Adyatma-Dwiki/GPS-Microservice.git
 cd gps-logs-microservice
 
 ```
