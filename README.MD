@@ -26,7 +26,7 @@ This microservice handles the storage and management of GPS logs for vehicles.
   It is assumed that `plate_number` may not always be unique or reliable due to administrative inconsistencies or potential input errors (e.g., fake or duplicated plates). Therefore, the `id` field from the `vehicle` table is used as the foreign key in the `gps_log` table to ensure uniqueness and reliable linkage.
 
 - **Speed Stored as Raw Double**  
-  The `speed` value is currently stored as a raw `double`, without conversion to km/h. This assumes that the GPS device sends consistent speed data. Unit conversion (e.g., to km/h) may be handled in future processing or display layers.
+  The `speed` value is currently stored as a raw `double`, without conversion to km/h. This assumes that the GPS device sends consistent speed data.
 
 - **Timestamp Represents Actual GPS Time**  
   The `timestamp` field reflects the original time reported by the GPS device rather than the time the server received the data. This approach ensures that historical tracking is chronologically accurate.
@@ -80,13 +80,14 @@ git clone https://github.com/Adyatma-Dwiki/GPS-Microservice.git
 cd gps-logs-microservice
 
 ```
-2. Create PostgreSQL database (e.g., fleet_gps_app) and configure connection in application.properties or application.yml:
+2. Create PostgreSQL database (e.g., fleet_gps_app) and configure connection in application.properties:
 
 ```properties
 spring.datasource.url=jdbc:postgresql://localhost:5432/fleet_gps_app
 spring.datasource.username=your_db_user
 spring.datasource.password=your_db_password
 ```
+
 3. Build and run the application:
 ```bash
 ./mvnw spring-boot:run
@@ -263,3 +264,26 @@ http://localhost:8080/swagger-ui/index.html
     "message": "Unexpected error"
   }
   ```
+
+## Unit Testing
+Unit tests are included to ensure that the core GPS-related functionalities work as expected.
+
+- Test File Location:
+```
+src/test/java/com/GPS_Microservice/GPS/Microservice/GPSControllerTest.java
+```
+- Test framework: Junit 5, Mockito
+- Coverage:
+    - Save GPS log
+    - Get last location
+    - Get GPS history
+    - Vehicle not found handling
+- How to run tests:
+```bash
+./mvnw test
+```
+## Note
+ If you are using Flyway and already have the schema created, make sure to disable migration during test runs to avoid conflict in application.properties:
+ ```bash
+ spring.flyway.enabled=false
+ ```
