@@ -77,7 +77,7 @@ The project uses the following database schema:
 
 ```bash
 git clone https://github.com/Adyatma-Dwiki/GPS-Microservice.git
-cd gps-logs-microservice
+cd GPS-Microservice
 
 ```
 2. Create PostgreSQL database (e.g., fleet_gps_app) and configure connection in application.properties:
