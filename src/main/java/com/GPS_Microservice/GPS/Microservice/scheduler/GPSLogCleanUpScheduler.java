@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.GPS_Microservice.GPS.Microservice.repository.GPSLogRepository;
 
@@ -22,6 +23,7 @@ public class GPSLogCleanUpScheduler {
 
     // Run once a day at 3 PM
     @Scheduled(cron = "${gps.log.cleanup.cron}")
+    @Transactional
      public void cleanOldLogs() {
         LocalDateTime threshold = LocalDateTime.now().minusDays(cleanupDays);
         int deletedCount = gpsLogRepository.deleteByTimestampBefore(threshold);
