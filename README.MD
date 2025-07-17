@@ -97,6 +97,12 @@ spring.datasource.password=your_db_password
 http://localhost:8080/swagger-ui/index.html
 ```
 
+5. Basic Auth credential
+```bash
+username: admin
+password: admin123
+```
+
 ## API Collection
 
 - Submit GPS Log
